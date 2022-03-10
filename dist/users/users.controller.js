@@ -27,7 +27,6 @@ let UsersController = class UsersController {
         this.usersService.create(body.email, body.password);
     }
     async findUser(id) {
-        console.log('handler is running');
         const user = await this.usersService.findOne(parseInt(id));
         if (!user) {
             throw new common_1.NotFoundException('user not found');
@@ -52,7 +51,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "createUser", null);
 __decorate([
-    serialize_interceptor_1.Serialize(user_dto_1.UserDto),
     common_1.Get('/:id'),
     __param(0, common_1.Param('id')),
     __metadata("design:type", Function),
@@ -83,6 +81,7 @@ __decorate([
 ], UsersController.prototype, "updateUser", null);
 UsersController = __decorate([
     common_1.Controller('auth'),
+    serialize_interceptor_1.Serialize(user_dto_1.UserDto),
     __metadata("design:paramtypes", [users_service_1.UsersService])
 ], UsersController);
 exports.UsersController = UsersController;
