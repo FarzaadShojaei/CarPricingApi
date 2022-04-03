@@ -10,6 +10,7 @@ import {
   Query,
   NotFoundException,
   Session,
+  
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
@@ -19,8 +20,11 @@ import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 
+import { User } from './user.entity';
+
 @Controller('auth')
 @Serialize(UserDto)
+
 export class UsersController {
   constructor(
     private usersService: UsersService,
@@ -33,7 +37,7 @@ export class UsersController {
   //}
 
   @Get('/whoami')
-  whoAmI(@CurrentUser() user: string) {
+  whoAmI(@CurrentUser() user: User) {
     return user;
   }
 
